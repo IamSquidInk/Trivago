@@ -18,22 +18,25 @@ class BookingPaymentActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_booking_payment)
 
-        supportActionBar?.show()
         supportActionBar?.setDisplayShowTitleEnabled(false)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.booking_payment)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
 
         val hotelName = intent.getStringExtra("HOTEL_NAME") ?: ""
         val hotelPrice = intent.getStringExtra("HOTEL_PRICE") ?: ""
         val hotelLocation = intent.getStringExtra("HOTEL_LOCATION") ?: ""
-        val checkIn = intent.getStringExtra("CHECK_IN") ?: ""
-        val checkOut = intent.getStringExtra("CHECK_OUT") ?: ""
+        val dateRange = intent.getStringExtra("DATE_RANGE") ?: "" // 👈 replaced CHECK_IN/CHECK_OUT
         val guests = intent.getStringExtra("GUESTS") ?: ""
         val rooms = intent.getStringExtra("ROOMS") ?: ""
 
-        findViewById<TextView>(R.id.tvHotelNameSummary).text = "com.example.hoteltrivago.Hotel: $hotelName"
-        findViewById<TextView>(R.id.tvDatesSummary).text = "Dates: $checkIn → $checkOut | Guests: $guests | Rooms: $rooms"
+        findViewById<TextView>(R.id.tvHotelNameSummary).text = "Hotel: $hotelName"
+        findViewById<TextView>(R.id.tvDatesSummary).text = "Dates: $dateRange | Guests: $guests | Rooms: $rooms"
         findViewById<TextView>(R.id.tvTotalPrice).text = "Total: $hotelPrice"
-
 
         val etGuestName = findViewById<EditText>(R.id.etGuestName)
         val etEmail = findViewById<EditText>(R.id.etEmail)
@@ -65,15 +68,15 @@ class BookingPaymentActivity : AppCompatActivity() {
             intent.putExtra("GUEST_NAME", name)
             intent.putExtra("HOTEL_NAME", hotelName)
             intent.putExtra("HOTEL_LOCATION", hotelLocation)
-            intent.putExtra("CHECK_IN", checkIn)
-            intent.putExtra("CHECK_OUT", checkOut)
+            intent.putExtra("DATE_RANGE", dateRange) // 👈 replaced CHECK_IN/CHECK_OUT
             intent.putExtra("GUESTS", guests)
+            intent.putExtra("ROOMS", rooms)
             intent.putExtra("TOTAL_PRICE", hotelPrice)
             intent.putExtra("BOOKING_REF", bookingRef)
-            intent.putExtra("ROOMS", rooms)
             startActivity(intent)
         }
     }
+
     override fun onSupportNavigateUp(): Boolean {
         onBackPressedDispatcher.onBackPressed()
         return true

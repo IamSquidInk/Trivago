@@ -20,7 +20,6 @@ class HotelDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hotel_details)
 
-        supportActionBar?.show()
         supportActionBar?.setDisplayShowTitleEnabled(false)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -33,19 +32,16 @@ class HotelDetailsActivity : AppCompatActivity() {
         val hotelName = intent.getStringExtra("HOTEL_NAME") ?: ""
         val hotelLocation = intent.getStringExtra("HOTEL_LOCATION") ?: ""
         val hotelPrice = intent.getStringExtra("HOTEL_PRICE") ?: ""
-        val checkIn = intent.getStringExtra("CHECK_IN") ?: ""
-        val checkOut = intent.getStringExtra("CHECK_OUT") ?: ""
-        val guests = intent.getStringExtra("GUESTS") ?: ""
-        val rooms = intent.getStringExtra("ROOMS") ?: ""
         val hotelDescription = intent.getStringExtra("HOTEL_DESCRIPTION") ?: ""
         val hotelRating = intent.getFloatExtra("HOTEL_RATING", 0f)
         val hotelImage = intent.getIntExtra("HOTEL_IMAGE", R.drawable.placeholder_hotel)
+        val dateRange = intent.getStringExtra("DATE_RANGE") ?: "" // 👈 replaced CHECK_IN/CHECK_OUT
+        val guests = intent.getStringExtra("GUESTS") ?: ""
+        val rooms = intent.getStringExtra("ROOMS") ?: ""
 
         findViewById<TextView>(R.id.tvHotelName).text = hotelName
         findViewById<TextView>(R.id.tvHotelLocation).text = hotelLocation
         findViewById<TextView>(R.id.tvHotelPrice).text = hotelPrice
-        findViewById<TextView>(R.id.tvHotelDescription).text =
-            "Experience the best of $hotelLocation."
         findViewById<TextView>(R.id.tvHotelDescription).text = hotelDescription
         findViewById<RatingBar>(R.id.rbHotelRating).rating = hotelRating
         findViewById<ImageView>(R.id.ivHotelImage).setImageResource(hotelImage)
@@ -64,8 +60,8 @@ class HotelDetailsActivity : AppCompatActivity() {
         }
 
         btnBookNow.setOnClickListener {
-            if (checkIn.isEmpty() || checkOut.isEmpty() || guests.isEmpty()) {
-                Toast.makeText(this, "Please fill in check-in, check-out and guests first", Toast.LENGTH_SHORT).show()
+            if (dateRange.isEmpty() || guests.isEmpty() || rooms.isEmpty()) {
+                Toast.makeText(this, "Please fill in dates, guests and rooms first", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -73,9 +69,9 @@ class HotelDetailsActivity : AppCompatActivity() {
             intent.putExtra("HOTEL_NAME", hotelName)
             intent.putExtra("HOTEL_PRICE", hotelPrice)
             intent.putExtra("HOTEL_LOCATION", hotelLocation)
-            intent.putExtra("CHECK_IN", checkIn)
-            intent.putExtra("CHECK_OUT", checkOut)
+            intent.putExtra("DATE_RANGE", dateRange) // 👈 replaced CHECK_IN/CHECK_OUT
             intent.putExtra("GUESTS", guests)
+            intent.putExtra("ROOMS", rooms)
             startActivity(intent)
         }
 
@@ -91,8 +87,8 @@ class HotelDetailsActivity : AppCompatActivity() {
                 .setNegativeButton("No, Keep It", null)
                 .show()
         }
-
     }
+
     override fun onSupportNavigateUp(): Boolean {
         onBackPressedDispatcher.onBackPressed()
         return true

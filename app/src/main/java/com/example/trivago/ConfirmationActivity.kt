@@ -25,8 +25,7 @@ class ConfirmationActivity : AppCompatActivity() {
 
         val guestName = intent.getStringExtra("GUEST_NAME") ?: ""
         val hotelName = intent.getStringExtra("HOTEL_NAME") ?: ""
-        val checkIn = intent.getStringExtra("CHECK_IN") ?: ""
-        val checkOut = intent.getStringExtra("CHECK_OUT") ?: ""
+        val dateRange = intent.getStringExtra("DATE_RANGE") ?: ""
         val guests = intent.getStringExtra("GUESTS") ?: ""
         val totalPrice = intent.getStringExtra("TOTAL_PRICE") ?: ""
         val bookingRef = intent.getStringExtra("BOOKING_REF") ?: ""
@@ -37,8 +36,7 @@ class ConfirmationActivity : AppCompatActivity() {
         prefs.edit()
             .putString("active_booking_ref", bookingRef)
             .putString("active_booking_hotel", hotelName)
-            .putString("active_booking_checkin", checkIn)
-            .putString("active_booking_checkout", checkOut)
+            .putString("active_booking_checkin", dateRange)
             .putString("active_booking_guests", guests)
             .putString("active_booking_rooms", rooms)
             .putString("active_booking_price", totalPrice)
@@ -47,9 +45,9 @@ class ConfirmationActivity : AppCompatActivity() {
 
         findViewById<TextView>(R.id.tvBookingRef).text = "Booking Ref: $bookingRef"
         findViewById<TextView>(R.id.tvConfirmationDetails).text =
-            "Guest: $guestName\ncom.example.hoteltrivago.Hotel: $hotelName\n" +
-                    "Check-in: $checkIn\nCheck-out: $checkOut\n" +
-                    "Guests: $guests | Rooms: $rooms\\nTotal: $totalPrice"
+            "Guest: $guestName\nHotel: $hotelName\n" +
+                    "Dates: $dateRange\n" +
+                    "Guests: $guests | Rooms: $rooms\nTotal: $totalPrice"
 
         findViewById<Button>(R.id.btnBackHome).setOnClickListener {
             val intent = Intent(this, SearchResultsActivity::class.java)

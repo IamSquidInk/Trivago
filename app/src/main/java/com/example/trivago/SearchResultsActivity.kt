@@ -13,6 +13,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import android.app.DatePickerDialog
 import java.util.Calendar
+import com.google.android.material.datepicker.MaterialDatePicker
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class SearchResultsActivity : AppCompatActivity() {
 
@@ -29,32 +33,36 @@ class SearchResultsActivity : AppCompatActivity() {
         }
 
         val etDestination = findViewById<EditText>(R.id.etDestination)
-        val etCheckIn = findViewById<EditText>(R.id.etCheckIn)
-        val etCheckOut = findViewById<EditText>(R.id.etCheckOut)
+        val etDateRange = findViewById<EditText>(R.id.etDateRange) // 👈 replaced etCheckIn/etCheckOut
         val etGuests = findViewById<EditText>(R.id.etGuests)
         val etRooms = findViewById<EditText>(R.id.etRooms)
         val tvResultsHeader = findViewById<TextView>(R.id.tvResultsHeader)
         val rvHotels = findViewById<RecyclerView>(R.id.rvHotels)
 
-        etCheckIn.isFocusable = false
-        etCheckIn.isClickable = true
-        etCheckIn.setOnClickListener {
-            showDatePicker { date -> etCheckIn.setText(date) }
-        }
+        // Date range picker 👇
+        etDateRange.setOnClickListener {
+            val dateRangePicker = MaterialDatePicker.Builder.dateRangePicker()
+                .setTitleText("Select Dates")
+                .build()
 
-        etCheckOut.isFocusable = false
-        etCheckOut.isClickable = true
-        etCheckOut.setOnClickListener {
-            showDatePicker { date -> etCheckOut.setText(date) }
+            dateRangePicker.addOnPositiveButtonClickListener { selection ->
+                val startDate = selection.first
+                val endDate = selection.second
+                val sdf = SimpleDateFormat("MMM dd", Locale.getDefault())
+                val formattedStart = sdf.format(Date(startDate))
+                val formattedEnd = sdf.format(Date(endDate))
+                etDateRange.setText("$formattedStart - $formattedEnd")
+            }
+
+            dateRangePicker.show(supportFragmentManager, "DATE_RANGE_PICKER")
         }
 
         rvHotels.layoutManager = LinearLayoutManager(this)
-        loadHotels(rvHotels, etCheckIn, etCheckOut, etGuests, etRooms)
+        loadHotels(rvHotels, etDateRange, etGuests, etRooms)
 
         findViewById<Button>(R.id.btnSearch).setOnClickListener {
             val destination = etDestination.text.toString().trim()
-            val checkIn = etCheckIn.text.toString().trim()
-            val checkOut = etCheckOut.text.toString().trim()
+            val dateRange = etDateRange.text.toString().trim()
             val guests = etGuests.text.toString().trim()
             val rooms = etRooms.text.toString().trim()
 
@@ -62,12 +70,8 @@ class SearchResultsActivity : AppCompatActivity() {
                 Toast.makeText(this, "Please enter a destination", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            if (checkIn.isEmpty()) {
-                Toast.makeText(this, "Please select a check-in date", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-            if (checkOut.isEmpty()) {
-                Toast.makeText(this, "Please select a check-out date", Toast.LENGTH_SHORT).show()
+            if (dateRange.isEmpty()) {
+                Toast.makeText(this, "Please select your dates", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             if (guests.isEmpty()) {
@@ -80,7 +84,6 @@ class SearchResultsActivity : AppCompatActivity() {
             }
 
             val key = destination.lowercase().trim()
-
             currentHotels = HotelData.hotels.entries
                 .filter { it.key.contains(key) || key.contains(it.key) }
                 .flatMap { it.value }
@@ -91,20 +94,18 @@ class SearchResultsActivity : AppCompatActivity() {
             }
 
             tvResultsHeader.text = "Hotels in $destination"
-            loadHotels(rvHotels, etCheckIn, etCheckOut, etGuests, etRooms)
+            loadHotels(rvHotels, etDateRange, etGuests, etRooms)
         }
     }
 
     private fun loadHotels(
         rvHotels: RecyclerView,
-        etCheckIn: EditText,
-        etCheckOut: EditText,
+        etDateRange: EditText,
         etGuests: EditText,
         etRooms: EditText
     ) {
         rvHotels.adapter = HotelAdapter(currentHotels) { hotel ->
-            val checkIn = etCheckIn.text.toString().trim()
-            val checkOut = etCheckOut.text.toString().trim()
+            val dateRange = etDateRange.text.toString().trim()
             val guests = etGuests.text.toString().trim()
             val rooms = etRooms.text.toString().trim()
 
@@ -115,8 +116,7 @@ class SearchResultsActivity : AppCompatActivity() {
             intent.putExtra("HOTEL_DESCRIPTION", hotel.description)
             intent.putExtra("HOTEL_RATING", hotel.rating)
             intent.putExtra("HOTEL_IMAGE", hotel.imageRes)
-            intent.putExtra("CHECK_IN", checkIn)
-            intent.putExtra("CHECK_OUT", checkOut)
+            intent.putExtra("DATE_RANGE", dateRange) // 👈 replaced CHECK_IN/CHECK_OUT
             intent.putExtra("GUESTS", guests)
             intent.putExtra("ROOMS", rooms)
             startActivity(intent)

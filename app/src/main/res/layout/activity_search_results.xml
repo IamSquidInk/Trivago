@@ -46,27 +46,44 @@
                 app:layout_constraintEnd_toEndOf="parent"/>
 
             <EditText
-                android:id="@+id/etCheckIn"
+                android:id="@+id/etDateRange"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:hint="Check-in Date"
-                android:textSize="14sp"
+                android:hint="Check-in - Check-out"
+                android:textSize="12sp"
                 android:background="@null"
+                android:focusable="false"
+                android:clickable="true"
                 app:layout_constraintTop_toBottomOf="@id/divider1"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/etCheckOut"
+                app:layout_constraintEnd_toStartOf="@id/etGuests"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"/>
+                android:layout_marginEnd="4dp"/>
 
             <EditText
-                android:id="@+id/etCheckOut"
+                android:id="@+id/etGuests"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:hint="Check-out Date"
-                android:textSize="14sp"
+                android:hint="Guests"
+                android:textSize="12sp"
+                android:inputType="number"
                 android:background="@null"
                 app:layout_constraintTop_toBottomOf="@id/divider1"
-                app:layout_constraintStart_toEndOf="@id/etCheckIn"
+                app:layout_constraintStart_toEndOf="@id/etDateRange"
+                app:layout_constraintEnd_toStartOf="@id/etRooms"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="4dp"/>
+
+            <EditText
+                android:id="@+id/etRooms"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Rooms"
+                android:textSize="12sp"
+                android:inputType="number"
+                android:background="@null"
+                app:layout_constraintTop_toBottomOf="@id/divider1"
+                app:layout_constraintStart_toEndOf="@id/etGuests"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="8dp"/>
 
@@ -75,45 +92,19 @@
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:background="#E0E0E0"
-                app:layout_constraintTop_toBottomOf="@id/etCheckIn"
+                app:layout_constraintTop_toBottomOf="@id/etDateRange"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
-
-            <EditText
-                android:id="@+id/etGuests"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:hint="Number of Guests"
-                android:textSize="14sp"
-                android:inputType="number"
-                android:background="@null"
-                app:layout_constraintTop_toBottomOf="@id/divider2"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/etRooms"
-                android:layout_marginTop="8dp"/>
-
-            <EditText
-                android:id="@+id/etRooms"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:hint="Number of Rooms"
-                android:textSize="14sp"
-                android:inputType="number"
-                android:background="@null"
-                app:layout_constraintTop_toBottomOf="@id/divider2"
-                app:layout_constraintStart_toEndOf="@id/etGuests"
-                app:layout_constraintEnd_toStartOf="@id/btnSearch"
+                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="8dp"/>
 
             <Button
                 android:id="@+id/btnSearch"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Search"
-                android:textSize="12sp"
                 app:layout_constraintTop_toBottomOf="@id/divider2"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginTop="8dp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
