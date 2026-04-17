@@ -104,8 +104,9 @@ class SearchResultsActivity : AppCompatActivity() {
         etGuests: EditText,
         etRooms: EditText
     ) {
-        rvHotels.adapter = HotelAdapter(currentHotels) { hotel ->
-            val dateRange = etDateRange.text.toString().trim()
+        val dateRange = etDateRange.text.toString().trim() // 👈 read it here
+
+        rvHotels.adapter = HotelAdapter(currentHotels, dateRange) { hotel -> // 👈 pass it here
             val guests = etGuests.text.toString().trim()
             val rooms = etRooms.text.toString().trim()
 
@@ -116,7 +117,7 @@ class SearchResultsActivity : AppCompatActivity() {
             intent.putExtra("HOTEL_DESCRIPTION", hotel.description)
             intent.putExtra("HOTEL_RATING", hotel.rating)
             intent.putExtra("HOTEL_IMAGE", hotel.imageRes)
-            intent.putExtra("DATE_RANGE", dateRange) // 👈 replaced CHECK_IN/CHECK_OUT
+            intent.putExtra("DATE_RANGE", dateRange)
             intent.putExtra("GUESTS", guests)
             intent.putExtra("ROOMS", rooms)
             startActivity(intent)

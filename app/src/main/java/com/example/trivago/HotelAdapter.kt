@@ -8,9 +8,12 @@ import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class HotelAdapter(
     private val hotels: List<Hotel>,
+    private val dateRange: String,
     private val onClick: (Hotel) -> Unit
 ) : RecyclerView.Adapter<HotelAdapter.HotelViewHolder>() {
 
@@ -40,8 +43,24 @@ class HotelAdapter(
         holder.rbRating.rating = hotel.rating
         holder.ivImage.setImageResource(hotel.imageRes)
 
-        // Total price will be calculated based on nights
-        holder.tvTotal.text = "Select dates for total price"
+        // Calculate total price based on date range
+        if (dateRange.isNotEmpty() && dateRange.contains(" - ")) {
+            try {
+                val sdf = SimpleDateFormat("MMM dd", Locale.getDefault())
+                val parts = dateRange.split(" - ")
+                val startDate = sdf.parse(parts[0])
+                val endDate = sdf.parse(parts[1])
+                if (startDate != null && endDate != null) {
+                    val nights = ((endDate.time - startDate.time) / (1000 * 60 * 60 * 24)).toInt()
+                    val total = nights * hotel.pricePerNight
+                    holder.tvTotal.text = "$$total total for $nights nights"
+                }
+            } catch (e: Exception) {
+                holder.tvTotal.text = "Select dates for total price"
+            }
+        } else {
+            holder.tvTotal.text = "Select dates for total price"
+        }
 
         holder.btnBook.setOnClickListener { onClick(hotel) }
         holder.itemView.setOnClickListener { onClick(hotel) }
