@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/confirmation"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".ConfirmationActivity">
+
+    <ImageView
+        android:id="@+id/ivCheckIcon"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@android:drawable/checkbox_on_background"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="40dp"/>
+
+    <TextView
+        android:id="@+id/tvConfirmedTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Booking Confirmed!"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/ivCheckIcon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/tvBookingRef"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Booking Ref: "
+        android:textSize="16sp"
+        android:gravity="center"
+        android:textColor="#666666"
+        app:layout_constraintTop_toBottomOf="@id/tvConfirmedTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:id="@+id/tvConfirmationDetails"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Details will appear here"
+        android:textSize="16sp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/tvBookingRef"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
+
+    <Button
+        android:id="@+id/btnCancelBooking"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Cancel Booking"
+        android:backgroundTint="#F44336"
+        app:layout_constraintTop_toBottomOf="@id/tvConfirmationDetails"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="32dp"/>
+
+    <Button
+        android:id="@+id/btnBackHome"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Back to Home"
+        app:layout_constraintTop_toBottomOf="@id/btnCancelBooking"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="12dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

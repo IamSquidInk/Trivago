@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/booking_payment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BookingPaymentActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/tvBookingSummary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Booking Summary"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"/>
+
+        <TextView
+            android:id="@+id/tvHotelNameSummary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Hotel: "
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/tvBookingSummary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/tvDatesSummary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Dates: "
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/tvHotelNameSummary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="4dp"/>
+
+        <TextView
+            android:id="@+id/tvTotalPrice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Total: $0"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#E91E63"
+            app:layout_constraintTop_toBottomOf="@id/tvDatesSummary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="4dp"/>
+
+        <EditText
+            android:id="@+id/etGuestName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Full Name"
+            app:layout_constraintTop_toBottomOf="@id/tvTotalPrice"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="20dp"/>
+
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            app:layout_constraintTop_toBottomOf="@id/etGuestName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="12dp"/>
+
+        <EditText
+            android:id="@+id/etCardNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Card Number"
+            android:inputType="number"
+            app:layout_constraintTop_toBottomOf="@id/etEmail"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="12dp"/>
+
+        <EditText
+            android:id="@+id/etExpiry"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="MM/YY"
+            android:inputType="number"
+            app:layout_constraintTop_toBottomOf="@id/etCardNumber"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="12dp"/>
+
+        <EditText
+            android:id="@+id/etCVV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="CVV"
+            android:inputType="number"
+            app:layout_constraintTop_toBottomOf="@id/etExpiry"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="12dp"/>
+
+        <CheckBox
+            android:id="@+id/cbTerms"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="I agree to the terms and conditions"
+            app:layout_constraintTop_toBottomOf="@id/etCVV"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"/>
+
+        <Button
+            android:id="@+id/btnConfirmBooking"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Confirm Booking"
+            app:layout_constraintTop_toBottomOf="@id/cbTerms"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="24dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
