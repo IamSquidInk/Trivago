@@ -104,9 +104,9 @@ class SearchResultsActivity : AppCompatActivity() {
         etGuests: EditText,
         etRooms: EditText
     ) {
-        val dateRange = etDateRange.text.toString().trim() // 👈 read it here
+        val dateRange = etDateRange.text.toString().trim()
 
-        rvHotels.adapter = HotelAdapter(currentHotels, dateRange) { hotel -> // 👈 pass it here
+        rvHotels.adapter = HotelAdapter(currentHotels, dateRange) { hotel ->
             val guests = etGuests.text.toString().trim()
             val rooms = etRooms.text.toString().trim()
 

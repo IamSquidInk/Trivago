@@ -35,7 +35,7 @@ class HotelDetailsActivity : AppCompatActivity() {
         val hotelDescription = intent.getStringExtra("HOTEL_DESCRIPTION") ?: ""
         val hotelRating = intent.getFloatExtra("HOTEL_RATING", 0f)
         val hotelImage = intent.getIntExtra("HOTEL_IMAGE", R.drawable.placeholder_hotel)
-        val dateRange = intent.getStringExtra("DATE_RANGE") ?: "" // 👈 replaced CHECK_IN/CHECK_OUT
+        val dateRange = intent.getStringExtra("DATE_RANGE") ?: ""
         val guests = intent.getStringExtra("GUESTS") ?: ""
         val rooms = intent.getStringExtra("ROOMS") ?: ""
 
@@ -69,7 +69,7 @@ class HotelDetailsActivity : AppCompatActivity() {
             intent.putExtra("HOTEL_NAME", hotelName)
             intent.putExtra("HOTEL_PRICE", hotelPrice)
             intent.putExtra("HOTEL_LOCATION", hotelLocation)
-            intent.putExtra("DATE_RANGE", dateRange) // 👈 replaced CHECK_IN/CHECK_OUT
+            intent.putExtra("DATE_RANGE", dateRange)
             intent.putExtra("GUESTS", guests)
             intent.putExtra("ROOMS", rooms)
             startActivity(intent)

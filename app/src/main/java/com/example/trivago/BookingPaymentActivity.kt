@@ -30,7 +30,7 @@ class BookingPaymentActivity : AppCompatActivity() {
         val hotelName = intent.getStringExtra("HOTEL_NAME") ?: ""
         val hotelPrice = intent.getStringExtra("HOTEL_PRICE") ?: ""
         val hotelLocation = intent.getStringExtra("HOTEL_LOCATION") ?: ""
-        val dateRange = intent.getStringExtra("DATE_RANGE") ?: "" // 👈 replaced CHECK_IN/CHECK_OUT
+        val dateRange = intent.getStringExtra("DATE_RANGE") ?: ""
         val guests = intent.getStringExtra("GUESTS") ?: ""
         val rooms = intent.getStringExtra("ROOMS") ?: ""
 
@@ -68,7 +68,7 @@ class BookingPaymentActivity : AppCompatActivity() {
             intent.putExtra("GUEST_NAME", name)
             intent.putExtra("HOTEL_NAME", hotelName)
             intent.putExtra("HOTEL_LOCATION", hotelLocation)
-            intent.putExtra("DATE_RANGE", dateRange) // 👈 replaced CHECK_IN/CHECK_OUT
+            intent.putExtra("DATE_RANGE", dateRange)
             intent.putExtra("GUESTS", guests)
             intent.putExtra("ROOMS", rooms)
             intent.putExtra("TOTAL_PRICE", hotelPrice)
